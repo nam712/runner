@@ -1,0 +1,25 @@
+<form [formGroup]="formSave">
+    <div class="formgrid grid">
+        <app-text-input [property]="f['code']" class="col-12 md:col-6" [maxLength]="20"
+            [labelValue]="'Mã sinh viên'"></app-text-input>
+        <app-text-input [property]="f['fullname']" class="col-12 md:col-6" [maxLength]="200"
+            [labelValue]="'Họ và tên'"></app-text-input>
+        <app-radio-button [property]="f['gender']" class="col-12 md:col-6"
+            [labelValue]="'Giới tính'" [options]="genderOptions"
+            optionLabel="label" optionValue="value">
+        </app-radio-button>
+        <app-date-picker [property]="f['dateOfBirth']"
+            [labelValue]="'Ngày sinh'"
+            class="col-12 md:col-6"></app-date-picker>
+        <app-text-input [property]="f['address']" class="col-12 md:col-12"
+            [labelValue]="'Quê quán'"></app-text-input>
+        <app-text-input [property]="f['phoneNumber']" class="col-12 md:col-6"
+            [labelValue]="'Số điện thoại'"></app-text-input>
+    </div>
+    <div class="flex justify-content-center app-dialog-footer">
+        <p-button icon="pi pi-arrow-left" [label]="'common.label.back' | translateAsync"
+            severity="secondary" (onClick)="onCancel()"></p-button>
+        <p-button type="submit" icon="pi pi-save" [label]="'common.label.save' | translateAsync"
+            (onClick)="onSave()"></p-button>
+    </div>
+</form>

@@ -1,0 +1,14 @@
+<form [formGroup]="formSave">
+    <div class="formgrid grid">
+        <app-text-input [property]="f['code']" [readonly]="!!f['id'].value" class="col-12 md:col-6" [labelValue]="'Mã phòng'"></app-text-input>
+        <app-text-input [property]="f['name']" class="col-12 md:col-6" [labelValue]="'Tên phòng'"></app-text-input>
+        <app-drop-down [property]="f['roomTypeCode']" [labelValue]="'Loại phòng'" [options]="roomTypeList"
+            optionLabel="name" optionValue="code" class="col-12 md:col-6" [showClear]="true"></app-drop-down>
+        <app-text-input [property]="f['amount']" class="col-12 md:col-6" [labelValue]="'Số người tối đa'"></app-text-input>
+    </div>
+    <div class="flex justify-content-center app-dialog-footer">
+        <p-button icon="pi pi-times" [label]="'common.label.quit' | translateAsync" styleClass="p-button-outlined"
+            (onClick)="onClose()"></p-button>
+        <p-button icon="pi pi-save" [label]="'common.label.save' | translateAsync" (onClick)="onSave()"></p-button>
+    </div>
+</form>

@@ -1,0 +1,36 @@
+<form [formGroup]="formSave">
+    <div class="formgrid grid">
+        <!-- Parent Organization -->
+        <app-org-selector class="col-12 md:col-6"
+            [labelValue]="'mngOrganization.organization.orgParent' | translateAsync"
+            [property]="f['parentId']" [orgService]="orgService"
+        ></app-org-selector>
+        <div class="col-12 md:col-6"></div>
+        <app-text-input [property]="f['code']" [readonly]="!!f['id'].value"
+            class="col-12 md:col-6"
+            [labelValue]="'mngOrganization.organization.code' | translateAsync"
+        ></app-text-input>
+        <app-text-input [property]="f['name']"
+            class="col-12 md:col-6"
+            [labelValue]="'mngOrganization.organization.name' | translateAsync"
+        ></app-text-input>
+        <app-date-picker
+            [property]="f['establishDate']"
+            [labelValue]="'mngOrganization.organization.establishDate' | translateAsync"
+            class="col-12 md:col-6"></app-date-picker>
+        <app-date-picker
+            [property]="f['expriedDate']"
+            [labelValue]="'mngOrganization.organization.expriedDate' | translateAsync"
+            class="col-12 md:col-6"></app-date-picker>
+        <app-text-input [property]="f['description']"
+            class="col-12"
+            type="text-area"
+            rows="4"
+            [labelValue]="'setting.category.description' | translateAsync"
+        ></app-text-input>
+    </div>
+    <div class="flex justify-content-center app-dialog-footer">
+        <p-button icon="pi pi-times" [label]="'common.label.quit' | translateAsync" styleClass="p-button-outlined" (onClick)="onClose()"></p-button>
+        <p-button icon="pi pi-save" [label]="'common.label.save' | translateAsync" (onClick)="onSave()"></p-button>
+    </div>
+</form>

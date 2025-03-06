@@ -1,0 +1,32 @@
+::ng-deep app-root {
+
+    // panel style
+    .p-panel-header {
+        display: flex;
+        padding: 5px !important;
+    }
+    .loading-page {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        z-index: 9999999;
+        top: 0;
+        pointer-events: none;
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+    .copyright {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        z-index: 9999999;
+        top: 0;
+        pointer-events: none;
+        // background-color: rgba(0, 0, 0, 0.2);
+        color: rgba(0, 0, 0, 0.2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        justify-items: center;
+        font-size: 150px;
+    }
+}

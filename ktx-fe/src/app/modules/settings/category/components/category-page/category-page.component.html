@@ -1,0 +1,183 @@
+<div *hasPermission="[this, 'action.view', 'resource.category']">
+    <div class="grid">
+        <div class="md:col-6 col-12">
+            <p-panel>
+                <ng-template pTemplate="header" class="block">
+                    <div class="flex justify-content-between flex-wrap">
+                        <b class="flex align-items-center">{{ 'setting.categoryType.title' | translateAsync }}</b>
+                        <p-button
+                            *hasPermission="[this, 'action.insert', 'resource.category']"
+                            class="flex align-items-center"
+                            icon="pi pi-plus"
+                            [pTooltip]="'common.label.add' | translateAsync"
+                            (onClick)="prepareCreateOrUpdate()"></p-button>
+                    </div>
+                </ng-template>
+                <div>
+                    <div class="p-inputgroup">
+                        <input
+                            [(ngModel)]="keySearchCategoryTypeCode"
+                            class="flex-1"
+                            type="text"
+                            pInputText
+                            [placeholder]="'Mã loại danh mục'" />
+                        <input
+                            [(ngModel)]="keySearchCategoryTypeName"
+                            class="flex-1"
+                            type="text"
+                            pInputText
+                            [placeholder]="'Tên loại danh mục'" />
+                        <button 
+                            type="button" pButton
+                            icon="pi pi-search"
+                            styleClass="p-button-warn"
+                            [pTooltip]="'common.label.search' | translateAsync"
+                            (click)="onSearchCategoryType()"></button>
+                    </div>
+                    <div class="p-1">
+                        <p-table 
+                            [value]="categoryTypeList"
+                            selectionMode="single"
+                            [(selection)]="selectedCategoryType"
+                            dataKey="id"
+                            styleClass="p-datatable-sm"
+                            (onRowSelect)="onCategoryTypeSelect($event)"
+                            scrollHeight="500px">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th style="width: 5%;">STT</th>
+                                    <th pSortableColumn="code" style="width: 25%">
+                                        {{ 'setting.categoryType.codeShort' | translateAsync }} <p-sortIcon field="code"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="name" style="width: 50%">
+                                        {{ 'setting.categoryType.nameShort' | translateAsync }} <p-sortIcon field="name"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 20%"></th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-item let-index="rowIndex">
+                                <tr [pSelectableRow]="item">
+                                    <td><span class="p-column-title">STT</span>{{ index + 1 }}</td>
+                                    <td><span class="p-column-title">{{ 'setting.categoryType.codeShort' | translateAsync }}</span>{{ item.code }}</td>
+                                    <td><span class="p-column-title">{{ 'setting.categoryType.nameShort' | translateAsync }}</span>{{ item.name }}</td>
+                                    <td><span class="p-column-title">Thao tác</span>
+                                        <div class="flex justify-content-center">
+                                            <p-button
+                                                *hasPermission="[this, 'action.update', 'resource.category']"
+                                                icon="pi pi-pencil"
+                                                [pTooltip]="'common.label.edit' | translateAsync"
+                                                styleClass="p-button-rounded p-button-text"
+                                                (onClick)="prepareCreateOrUpdate(item.id)"></p-button>
+                                            <p-button
+                                                *hasPermission="[this, 'action.delete', 'resource.category']"
+                                                icon="pi pi-trash"
+                                                [pTooltip]="'common.label.delete' | translateAsync"
+                                                styleClass="p-button-rounded p-button-danger p-button-text"
+                                                (onClick)="onDelete(item.id)"></p-button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="4">{{ 'common.table.dataNotFound' | translateAsync }}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </p-panel>
+        </div>
+        <div class="md:col-6 col-12">
+            <p-panel>
+                <ng-template pTemplate="header" class="block">
+                    <div class="flex justify-content-between flex-wrap">
+                        <b class="flex align-items-center">{{ 'setting.category.title' | translateAsync }} {{ selectedCategoryType?.name }}</b>
+                        <p-button
+                            *hasPermission="[this, 'action.insert', 'resource.category']"
+                            class="flex align-items-center"
+                            icon="pi pi-plus"
+                            [pTooltip]="'common.label.add' | translateAsync"
+                            (onClick)="prepareCreateOrUpdateCategory()"></p-button>
+                    </div>
+                </ng-template>
+                <div>
+                    <div class="p-inputgroup">
+                        <input
+                            [(ngModel)]="keySearchCategoryCode"
+                            class="flex-1"
+                            type="text"
+                            pInputText
+                            [placeholder]="'Mã danh mục'" />
+                        <input
+                            [(ngModel)]="keySearchCategoryName"
+                            class="flex-1"
+                            type="text"
+                            pInputText
+                            [placeholder]="'Tên danh mục'" />
+                        <button 
+                            type="button" pButton
+                            icon="pi pi-search"
+                            styleClass="p-button-warn"
+                            [pTooltip]="'common.label.search' | translateAsync"
+                            (click)="onSearchCategory()"></button>
+                    </div>
+                    <div class="p-1">
+                        <p-table 
+                            [value]="categoryList"
+                            styleClass="p-datatable-sm"
+                            scrollHeight="500px">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th style="width: 5%;">STT</th>
+                                    <th pSortableColumn="code" style="width: 25%">
+                                        {{ 'setting.category.codeShort' | translateAsync }} <p-sortIcon field="code"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="name" style="width: 50%">
+                                        {{ 'setting.category.nameShort' | translateAsync }} <p-sortIcon field="name"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 20%"></th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-item let-index="rowIndex">
+                                <tr>
+                                    <td><span class="p-column-title">STT</span>{{ index + 1 }}</td>
+                                    <td><span class="p-column-title">{{ 'setting.category.codeShort' | translateAsync }}</span>{{ item.code }}</td>
+                                    <td><span class="p-column-title">{{ 'setting.category.nameShort' | translateAsync }}</span>{{ item.name }}</td>
+                                    <td>
+                                        <span class="p-column-title">Thao tác</span>
+                                        <div class="flex justify-content-center">
+                                            <p-button
+                                                *hasPermission="[this, 'action.update', 'resource.category']"
+                                                icon="pi pi-pencil"
+                                                [pTooltip]="'common.label.edit' | translateAsync"
+                                                styleClass="p-button-rounded p-button-text"
+                                                (onClick)="prepareCreateOrUpdateCategory(item.id)"></p-button>
+                                            <p-button
+                                                *hasPermission="[this, 'action.delete', 'resource.category']"
+                                                icon="pi pi-trash"
+                                                [pTooltip]="'common.label.delete' | translateAsync"
+                                                styleClass="p-button-rounded p-button-danger p-button-text"
+                                                (onClick)="onDeleteCategory(item.id)"></p-button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="4">{{ 'common.table.dataNotFound' | translateAsync }}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                        
+                    </div>
+                </div>
+            </p-panel>
+        </div>
+    </div>
+</div>
+<div *hasNotPermission="[this, 'action.view', 'resource.category']" class="no-permission">
+    <i>
+        {{ 'common.error.haveNoPermission' | translateAsync }}
+    </i>
+</div>

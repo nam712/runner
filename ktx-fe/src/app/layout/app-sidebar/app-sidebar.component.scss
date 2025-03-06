@@ -1,0 +1,45 @@
+::ng-deep app-sidebar {
+    .p-panelmenu {
+        background-color: #023830;
+    }
+    .p-panelmenu .p-panelmenu-header .p-panelmenu-header-content {
+        border: none;
+        background: unset;
+    }
+    .p-panelmenu .p-panelmenu-panel {
+        margin-bottom: 0px;
+    }
+    .p-panelmenu .p-panelmenu-header .p-panelmenu-header-content .p-panelmenu-header-action {
+        color: #fff !important;
+    }
+    .p-panelmenu .p-panelmenu-content {
+        border: none;
+    }
+    .p-panelmenu .p-panelmenu-header:not(.p-disabled).p-highlight .p-panelmenu-header-content,
+    .p-panelmenu .p-panelmenu-content {
+        background: linear-gradient(45deg, #3e36ee, #5e23b8) !important;
+    }
+    .p-panelmenu .p-panelmenu-content .p-menuitem > .p-menuitem-content .p-menuitem-link .p-menuitem-text {
+        color: #fff;
+    }
+    .p-panelmenu .p-panelmenu-header:not(.p-highlight):not(.p-disabled):hover .p-panelmenu-header-content {
+        background: linear-gradient(45deg, #3e36ee, #5e23b8) !important;
+        border-color: unset;
+    }
+    .p-panelmenu .p-panelmenu-content .p-menuitem:not(.p-highlight):not(.p-disabled) > .p-menuitem-content:hover {
+        background: #023830;
+        border-radius: 8px;
+    }
+    .p-panelmenu .p-panelmenu-content .p-menuitem:not(.p-highlight):not(.p-disabled) > .p-menuitem-content:hover .p-menuitem-link .p-menuitem-text {
+        color: #fff;
+    }
+    .p-submenu-list {
+        padding: 0px 10px !important;
+    }
+    .p-scrollpanel-content {
+        padding: 0px !important;
+    }
+    .p-scrollpanel-wrapper {
+        padding-bottom: 20px;
+    }
+}

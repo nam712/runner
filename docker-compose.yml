@@ -1,0 +1,47 @@
+services:
+  db:
+    #image: mysql:latest
+    #build:
+     # context: ./db
+     # dockerfile: Dockerfile
+    image: ada26/ktx:db
+    ports:
+      - "3306:3306"
+    volumes:
+      - sqlvolume:/var/lib/mysql
+      - ./db/db_ktx.sql:/docker-entrypoint-initdb.d/db_ktx.sql
+    networks:
+      - ktx-network
+
+  ktx-fe:
+    #build:
+      #context: ./ktx-fe
+      #dockerfile: Dockerfile
+    image: ada26/ktx:fe
+    ports:
+      - "4300:4300"
+    depends_on:
+      - ktx-be
+    networks:
+      - ktx-network
+
+  ktx-be:
+    #build:
+      #context: ./ktx-be
+      #dockerfile: Dockerfile
+    image: ada26/ktx:be
+    ports:
+      - "8888:8888"
+    environment:
+      - SPRING_PROFILES_ACTIVE=development
+    depends_on:
+      - db
+    networks:
+      - ktx-network
+    restart: on-failure
+
+networks:
+  ktx-network:
+
+volumes:
+  sqlvolume:

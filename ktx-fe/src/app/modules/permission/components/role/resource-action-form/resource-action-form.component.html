@@ -1,0 +1,83 @@
+<div>
+    <div class="d-flex">
+        <form class="p-inputgroup">
+            <input [(ngModel)]="keySearch" name="keySearch" class="flex-1" type="text" pInputText
+                [placeholder]="'Tìm kiếm tài nguyên'" />
+            <button type="submit" pButton icon="pi pi-search" styleClass="p-button-warn"
+                [pTooltip]="'common.label.search' | translateAsync" (click)="onSearch()"></button>
+            <button type="button" pButton icon="pi pi-plus" class="p-button p-button-success"
+                [pTooltip]="'Thêm tài nguyên'" (click)="addResource()"></button>
+        </form>
+        <!-- <p-button class="flex align-items-center ml-2" icon="pi pi-plus" [label]="'Thêm'"></p-button> -->
+    </div>
+    <div class="mt-2">
+        <p-table [value]="filteredResourceList" [expandedRowKeys]="expandedRows" dataKey="code" styleClass="p-datatable-sm" scrollHeight="500px">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 5%;">STT</th>
+                    <th style="width: 25%">
+                        Mã tài nguyên
+                    </th>
+                    <th style="width: 50%">
+                        Tên tài nguyên
+                    </th>
+                    <th style="width: 20%"></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item let-index="rowIndex" let-expanded="expanded">
+                <tr>
+                    <td><span class="p-column-title">STT</span>{{ index + 1 }}</td>
+                    <td><span class="p-column-title">Mã tài nguyên</span>{{ item.code }}</td>
+                    <td><span class="p-column-title">Tên tài nguyên</span>{{ item.name }}</td>
+                    <td><span class="p-column-title">Thao tác</span>
+                        <div class="flex justify-content-between">
+                            <div>
+                                <button *ngIf="!item.editing" pButton pRipple type="button" icon="pi pi-pencil"
+                                    (click)="onEdit(item, index, expanded)"
+                                    [pTooltip]="'Chỉnh sửa'"
+                                    class="p-button-rounded p-button-text"></button>
+                                <button *ngIf="!item.editing" pButton pRipple type="button" icon="pi pi-trash"
+                                    (click)="onRemove(item, index)"
+                                    [pTooltip]="'Xóa'"
+                                    class="p-button-rounded p-button-danger p-button-text"></button>
+                                <button *ngIf="item.editing" pButton pRipple type="button" icon="pi pi-check"
+                                    (click)="onRowEditSave(item)"
+                                    [pTooltip]="'Lưu lại'"
+                                    class="p-button-rounded p-button-text p-button-success mr-2"></button>
+                                <button *ngIf="item.editing" pButton pRipple type="button" icon="pi pi-times"
+                                    (click)="onRowEditCancel(item, index)"
+                                    [pTooltip]="'Hủy bỏ'"
+                                    class="p-button-rounded p-button-text p-button-danger"></button>
+                            </div>
+                            <button type="button" pButton pRipple [pRowToggler]="item"
+                                class="p-button-text p-button-rounded p-button-plain"
+                                [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="rowexpansion" let-item>
+                <tr class="row-expand">
+                    <td colspan="4">
+                        <div class="grid p-2" style="--bs-columns: 4;">
+                            <div *ngFor="let category of item.actions" class="field-checkbox mb-1">
+                                <p-checkbox [label]="category.name" [disabled]="!item.editing" name="action"
+                                    [value]="category" [(ngModel)]="item.selectedActions"></p-checkbox>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="4">{{ 'common.table.dataNotFound' | translateAsync }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+<div class="flex justify-content-center app-dialog-footer mt-2">
+    <p-button icon="pi pi-times" [label]="'common.label.quit' | translateAsync" styleClass="p-button-outlined"
+        (onClick)="onClose()"></p-button>
+    <!-- <p-button icon="pi pi-save" [label]="'common.label.save' | translateAsync" (onClick)="onSave()"></p-button> -->
+</div>

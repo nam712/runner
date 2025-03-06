@@ -1,0 +1,18 @@
+<form [formGroup]="formSave">
+    <div class="formgrid grid">
+        <app-employee-picker class="col-12 md:col-6" [labelValue]="'Cán bộ/Học viên'" [property]="f['employeeId']"
+            (onChange)="onSelectedEmp($event)" [employeeService]="employeeService"></app-employee-picker>
+        <app-text-input [property]="f['username']" class="col-12 md:col-6" [labelValue]="'Tài khoản đăng nhập'"
+            [readonly]="true"></app-text-input>
+        <!-- <app-text-input [property]="f['password']" class="col-12 md:col-6" [labelValue]="'Mật khẩu'"></app-text-input>
+        <app-text-input [property]="f['confirmPassword']" class="col-12 md:col-6"
+            [labelValue]="'Xác nhận lại mật khẩu'"></app-text-input> -->
+        <app-multi-select [property]="f['roleIds']" [options]="roleList" optionLabel="name"
+            optionValue="id" class="col-12 md:col-12" [labelValue]="'Vai trò'"></app-multi-select>
+    </div>
+    <div class="flex justify-content-center app-dialog-footer">
+        <p-button icon="pi pi-times" [label]="'common.label.quit' | translateAsync" styleClass="p-button-outlined"
+            (onClick)="onClose()"></p-button>
+        <p-button icon="pi pi-save" [label]="'common.label.save' | translateAsync" (onClick)="onSave()"></p-button>
+    </div>
+</form>

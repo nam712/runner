@@ -1,0 +1,17 @@
+<form [formGroup]="formSave">
+    <div class="formgrid grid">
+        <app-text-input [property]="f['code']" [readonly]="!!f['id'].value" class="col-12 md:col-6" [labelValue]="'Mã lớp'"></app-text-input>
+        <app-text-input [property]="f['name']" class="col-12 md:col-6" [labelValue]="'Tên lớp'"></app-text-input>
+        <app-org-selector class="col-12 md:col-6"
+            [labelValue]="'Khoa'"
+            [property]="f['departmentCode']"
+            [fieldValue]="'code'"
+            [orgService]="orgService"
+        ></app-org-selector>
+    </div>
+    <div class="flex justify-content-center app-dialog-footer">
+        <p-button icon="pi pi-times" [label]="'common.label.quit' | translateAsync" styleClass="p-button-outlined"
+            (onClick)="onClose()"></p-button>
+        <p-button icon="pi pi-save" [label]="'common.label.save' | translateAsync" (onClick)="onSave()"></p-button>
+    </div>
+</form>

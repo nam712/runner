@@ -1,0 +1,32 @@
+<div id="app-header">
+    <div class="flex justify-content-between flex-wrap h-full">
+        <div class="flex align-items-center justify-content-center">
+            <p-button (click)="sidebarVisible = true" styleClass="p-button-link" class="show-mobile" icon="pi pi-bars"></p-button>
+        </div>
+        <div class="flex align-items-center justify-content-center">
+            <!-- <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" styleClass="mr-2"  shape="circle"></p-avatar> -->
+            <p-avatar [label]="character" styleClass="mr-2" shape="circle"></p-avatar>
+            <div class="pr-4 text-white">
+                <p-splitButton [model]="items">
+                    <ng-template pTemplate="content">
+                        <div class="text-left">
+                            <div>
+                                <i>Xin chào!</i>
+                            </div>
+                            <div>
+                                <strong>{{ fullname }}</strong>
+                            </div>
+                        </div>
+                    </ng-template>
+                   
+                </p-splitButton>
+
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-sidebar [(visible)]="sidebarVisible">
+    <app-sidebar></app-sidebar>
+</p-sidebar>

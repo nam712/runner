@@ -1,0 +1,15 @@
+<p-panel>
+    <ng-template pTemplate="header" class="block">
+        <div class="flex justify-content-between flex-wrap">
+            <b class="flex align-items-center">{{ 'mngOrganization.organization.treeTitle' | translateAsync }}</b>
+            <p-button
+                class="flex align-items-center"
+                icon="pi pi-plus"
+                [pTooltip]="'common.label.add' | translateAsync"
+                (onClick)="prepareCreateOrUpdate()"></p-button>
+        </div>
+    </ng-template>
+    <div>
+        <p-tree class="w-full md:w-30rem" [value]="orgTree" selectionMode="single" [loading]="loading" (onNodeExpand)="nodeExpand($event)"></p-tree>
+    </div>
+</p-panel>

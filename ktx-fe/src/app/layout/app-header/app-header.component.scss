@@ -1,0 +1,39 @@
+::ng-deep app-header {
+    #app-header {
+        height: 50px;
+        background: linear-gradient(45deg, #00E08F, #00A3FF);
+        border-bottom-right-radius: 8px;
+    }
+    
+    .p-sidebar .p-sidebar-header + .p-sidebar-content {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .p-sidebar-left {
+        background: #023830;
+    }
+    p-splitbutton {
+        .p-splitbutton-defaultbutton,
+        .p-splitbutton-menubutton {
+            background: none;
+            border: none;
+            padding: 0px !important;
+        }
+        .p-splitbutton-defaultbutton:hover {
+            background: none !important;
+            cursor: default;
+        }
+        .p-splitbutton-menubutton:hover {
+            background: rgba(59, 130, 246, 0.04) !important;
+            color: #3B82F6 !important;
+            border-color: transparent !important;
+            border-radius: 50%;
+        }
+    }
+}
+
+@media only screen and (min-width: 960px) {
+    .show-mobile {
+        display: none;
+    }
+}

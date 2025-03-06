@@ -1,0 +1,114 @@
+<div *hasPermission="[this, 'action.view', 'resource.waterElectricBill']">
+    <p-panel [toggleable]="true">
+        <ng-template pTemplate="header">
+            <div>
+                <i class="fa-solid fa-bars mr-2"></i>
+                <b>{{ 'common.label.searchInfo' | translateAsync }}</b>
+            </div>
+        </ng-template>
+        <form [formGroup]="formSearch">
+            <div class="formgrid grid">
+                <app-drop-down [property]="f['month']" [labelValue]="'Tháng'" [options]="monthList" optionLabel="label"
+                    optionValue="value" class="col-12 md:col-6" [showClear]="true"></app-drop-down>
+                <app-drop-down [property]="f['year']" [labelValue]="'Năm'" [options]="yearList" optionLabel="label"
+                    optionValue="value" class="col-12 md:col-6" [showClear]="true"></app-drop-down>
+                <app-text-input [property]="f['code']" class="col-12 md:col-6"
+                    [labelValue]="'Mã hóa đơn'"></app-text-input>
+                <app-drop-down [property]="f['roomCode']" [labelValue]="'Phòng'" [options]="roomList" optionLabel="name"
+                    optionValue="code" class="col-12 md:col-6" [showClear]="true"></app-drop-down>
+                    <app-radio-button [property]="f['status']" class="col-12 md:col-6"
+                    [labelValue]="'Trạng thái'" [options]="statusOptions"
+                    optionLabel="label" optionValue="value"></app-radio-button>
+            </div>
+            <div class="flex justify-content-center app-dialog-footer">
+                <p-button type="submit" icon="pi pi-search" [label]="'common.label.search' | translateAsync"
+                    (onClick)="doSearch()"></p-button>
+            </div>
+        </form>
+    </p-panel>
+    <p-panel styleClass="pt-2">
+        <ng-template pTemplate="header" class="block">
+            <div class="flex-1 flex justify-content-between flex-wrap">
+                <span class="flex align-items-center">
+                    <i class="fa-solid fa-list mr-2"></i>
+                    <b>Danh sách chỉ số điện/nước</b>
+                </span>
+                <div class="d-flex">
+                    <p-button *hasPermission="[this, 'action.insert', 'resource.waterElectricBill']"
+                        class="flex align-items-center" icon="pi pi-plus" [label]="'Lập hóa đơn'"
+                        (onClick)="prepareCreateOrUpdate()"></p-button>
+                </div>
+            </div>
+        </ng-template>
+        <p-table [value]="dataTable?.data" [paginator]="dataTable?.data && dataTable?.data?.length" [rows]="10"
+            styleClass="p-datatable-sm" [lazy]="true" [totalRecords]="dataTable?.recordsTotal"
+            (onLazyLoad)="doSearch($event)" [showCurrentPageReport]="true" [first]="dataTable?.first"
+            currentPageReportTemplate="Tìm thấy {totalRecords} kết quả, hiển thị từ {first} - {last}"
+            [scrollable]="true" [responsive]="true" responsiveLayout="stack" [breakpoint]="'960px'">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 5%">STT</th>
+                    <th style="width: 20%">
+                        Tháng
+                    </th>
+                    <th style="width: 20%">
+                        Mã hóa đơn
+                    </th>
+                    <th style="width: 20%">
+                        Phòng
+                    </th>
+                    <th style="width: 20%">
+                        Thành tiền (VNĐ)
+                    </th>
+                    <th style="width: 20%">
+                        Trạng thái
+                    </th>
+                    <th style="width: 10%"></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item let-index="rowIndex">
+                <tr>
+                    <td><span class="p-column-title">STT</span>{{ index + 1 }}</td>
+                    <td><span class="p-column-title">Tháng</span>{{ item.month }}/{{ item.year }}</td>
+                    <td><span class="p-column-title">Mã hóa đơn</span>{{ item.code }}</td>
+                    <td><span class="p-column-title">Phòng</span>{{ item.roomName }}</td>
+                    <td><span class="p-column-title">Thành tiền (VNĐ)</span>{{ item.totalMoney | currency:' ':'symbol':'1.0-0' }}</td>
+                    <td><span class="p-column-title">Trạng thái</span>
+                        <span *ngIf="item.status == 'PAID'" class="status-sucess">Đã thanh toán</span>
+                        <span *ngIf="item.status == 'NOT_YET'" class="status-error">Chưa thanh toán</span>
+                    </td>
+                    <td>
+                        <span class="p-column-title"></span>
+                        <div class="flex">
+                            <p-button
+                                icon="pi pi-list" [pTooltip]="'Chi tiết hóa đơn'"
+                                styleClass="p-button-rounded p-button-warning p-button-text" tooltipPosition="top"
+                                (onClick)="viewDetailBill(item.id)"></p-button>
+                            <p-button
+                                *ngIf="item.status != 'PAID'"
+                                icon="pi pi-money-bill" [pTooltip]="'Xác nhận thanh toán'"
+                                styleClass="p-button-rounded p-button-info p-button-text" tooltipPosition="top"
+                                (onClick)="payBill(item.code)"></p-button>
+                            <ng-container *ngIf="item.status != 'PAID'">
+                                <p-button *hasPermission="[this, 'action.delete', 'resource.waterElectricBill']"
+                                    icon="pi pi-trash" [pTooltip]="'common.label.delete' | translateAsync"
+                                    tooltipPosition="top" styleClass="p-button-rounded p-button-danger p-button-text"
+                                    (onClick)="onDelete(item.id)"></p-button>
+                            </ng-container>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="6">{{ 'common.table.dataNotFound' | translateAsync }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </p-panel>
+</div>
+<div *hasNotPermission="[this, 'action.view', 'resource.waterElectricBill']" class="no-permission">
+    <i>
+        {{ 'common.error.haveNoPermission' | translateAsync }}
+    </i>
+</div>

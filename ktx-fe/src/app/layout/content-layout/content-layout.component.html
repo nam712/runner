@@ -1,0 +1,24 @@
+<div id="wrap-body">
+    <!-- <app-header></app-header>
+    <div id="app-content" class="flex">
+        <app-sidebar id="wrap-sidebar" class=""></app-sidebar>
+        <div id="wrap-content"  class="flex-1">
+            <p-breadcrumb class="max-w-full" [model]="items" [home]="home"></p-breadcrumb>
+            <div class="content">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div> -->
+    <div id="wrap-left" class="show-mobile">
+        <app-sidebar id="wrap-sidebar" class=""></app-sidebar>
+    </div>
+    <div id="wrap-right">
+        <app-header></app-header>
+        <div id="wrap-content"  class="flex-1">
+            <p-breadcrumb class="max-w-full" [model]="items" [home]="home"></p-breadcrumb>
+            <div class="content">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>

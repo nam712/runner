@@ -1,0 +1,117 @@
+<div *hasPermission="[this, 'action.view', 'resource.contract']">
+    <p-panel [toggleable]="true">
+        <ng-template pTemplate="header">
+            <div>
+                <i class="fa-solid fa-bars mr-2"></i>
+                <b>{{ 'common.label.searchInfo' | translateAsync }}</b>
+            </div>
+        </ng-template>
+        <form [formGroup]="formSearch">
+            <div class="formgrid grid">
+                <app-text-input [property]="f['code']" class="col-12 md:col-6"
+                    [labelValue]="'Mã hợp đồng'"></app-text-input>
+                <app-radio-button [property]="f['status']" class="col-12 md:col-6"
+                    [labelValue]="'Trạng thái'" [options]="statusOptions"
+                    optionLabel="label" optionValue="value"></app-radio-button>
+                <app-text-input [property]="f['studentCode']" class="col-12 md:col-6"
+                    [labelValue]="'Mã sinh viên'"></app-text-input>
+            </div>
+            <div class="flex justify-content-center app-dialog-footer">
+                <p-button type="submit" icon="pi pi-search" [label]="'common.label.search' | translateAsync"
+                    (onClick)="doSearch()"></p-button>
+            </div>
+        </form>
+    </p-panel>
+    <p-panel styleClass="pt-2">
+        <ng-template pTemplate="header" class="block">
+            <div class="flex-1 flex justify-content-between flex-wrap">
+                <span class="flex align-items-center">
+                    <i class="fa-solid fa-list mr-2"></i>
+                    <b>Danh sách hợp đồng</b>
+                </span>
+                <div class="d-flex">
+                    <p-button *hasPermission="[this, 'action.insert', 'resource.contract']"
+                        class="flex align-items-center" icon="pi pi-plus" [label]="'common.label.add' | translateAsync"
+                        (onClick)="prepareCreateOrUpdate()"></p-button>
+                </div>
+            </div>
+        </ng-template>
+        <p-table [value]="dataTable?.data" [paginator]="dataTable?.data && dataTable?.data?.length" [rows]="10"
+            styleClass="p-datatable-sm" [lazy]="true" [first]="dataTable?.first"
+            [totalRecords]="dataTable?.recordsTotal" (onLazyLoad)="doSearch($event)" [showCurrentPageReport]="true"
+            currentPageReportTemplate="Tìm thấy {totalRecords} kết quả, hiển thị từ {first} - {last}"
+            [scrollable]="true" [responsive]="true" responsiveLayout="stack" [breakpoint]="'960px'">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 5%" >STT</th>
+                    <th style="width: 15%">
+                        Mã hợp đồng
+                    </th>
+                    <th style="width: 15%">
+                        Phòng
+                    </th>
+                    <th style="width: 20%">
+                        Sinh viên
+                    </th>
+                    <th style="width: 15%">
+                        Từ ngày
+                    </th>
+                    <th style="width: 15%">
+                        Đến ngày
+                    </th>
+                    <th style="width: 15%">
+                        Trạng thái
+                    </th>
+                    <th style="width: 10%"></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item let-index="rowIndex">
+                <tr>
+                    <td><span class="p-column-title">STT</span>{{ index + 1 }}</td>
+                    <td><span class="p-column-title">Mã hợp đồng</span>{{ item.code }}</td>
+                    <td><span class="p-column-title">Phòng</span>{{ item.roomName }}</td>
+                    <td><span class="p-column-title">Sinh viên</span>{{ item.studentFullname }}</td>
+                    <td><span class="p-column-title">Từ ngày</span>{{ item.fromDate | date:'dd/MM/yyyy' }}</td>
+                    <td><span class="p-column-title">Đến ngày</span>{{ item.toDate | date:'dd/MM/yyyy' }}</td>
+                    <td><span class="p-column-title">Trạng thái</span>
+                        <span *ngIf="item.status == 'ACTIVE'" class="status-sucess">Còn hiệu lực</span>
+                        <span *ngIf="item.status == 'INACTIVE'" class="status-error">Hết hạn</span>
+                    </td>
+                    <td>
+                        <span class="p-column-title"></span>
+                        <div class="flex justify-content-center">
+                            <ng-container *ngIf="item.status != 'INACTIVE'">
+                                <p-button
+                                    *hasPermission="[this, 'action.update', 'resource.contract']"
+                                    icon="pi pi-pencil" [pTooltip]="'common.label.edit' | translateAsync"
+                                    styleClass="p-button-rounded p-button-text" tooltipPosition="top" 
+                                    (onClick)="prepareCreateOrUpdate(item.id)"></p-button>
+                                <p-button
+                                    *hasPermission="[this, 'action.update', 'resource.contract']"
+                                    icon="pi pi-file-excel" [pTooltip]="'Hủy hợp đồng'"
+                                    styleClass="p-button-rounded p-button-warning p-button-text" tooltipPosition="top" 
+                                    (onClick)="onCancel(item)"></p-button>
+                                <p-button
+                                    *hasPermission="[this, 'action.delete', 'resource.contract']"
+                                    icon="pi pi-trash" [pTooltip]="'common.label.delete' | translateAsync"
+                                    tooltipPosition="top" 
+                                    styleClass="p-button-rounded p-button-danger p-button-text"
+                                    (onClick)="onDelete(item.id)"></p-button>
+                            </ng-container>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="6">{{ 'common.table.dataNotFound' | translateAsync }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </p-panel>
+</div>
+<div *hasNotPermission="[this, 'action.view', 'resource.contract']" class="no-permission">
+    <i>
+        {{ 'common.error.haveNoPermission' | translateAsync }}
+    </i>
+</div>

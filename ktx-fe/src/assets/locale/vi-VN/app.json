@@ -1,0 +1,167 @@
+{
+    "common": {
+        "label": {
+            "dataList": "Danh sách",
+            "add": "Thêm mới",
+            "search": "Tìm kiếm",
+            "edit": "Chỉnh sửa",
+            "delete": "Xóa",
+            "quit": "Thoát",
+            "back": "Trở lại",
+            "save": "Lưu lại",
+            "cancel": "Hủy",
+            "searchInfo": "Thông tin tìm kiếm",
+            "status": "Trạng thái",
+            "import": "Tải lên dữ liệu",
+            "register": "Đăng ký",
+            "confirmSave": "Bạn có chắc chắn muốn lưu thông tin?"
+        },
+        "toast": {
+            "haveError": "Có lỗi xảy ra",
+            "messageSummary": "Thông báo",
+            "importMultiFile": "Chỉ được phép chọn 1 tập tin"
+        },
+        "table": {
+            "dataNotFound": "Không tìm thấy dữ liệu"
+        },
+        "orgSelector": {
+            "clear": "Xóa",
+            "select": "Chọn đơn vị"
+        },
+        "import": {
+            "importError": "Tải lên dữ liệu không thành công"
+        },
+        "error": {
+            "duplicateCode": "Trùng mã",
+            "passwordIncorrect": "Mật khẩu không chính xác",
+            "haveNoPermission": "Bạn không có quyền thực hiện chức năng này!"
+        }
+    },
+    "success": "Thao tác thành công",
+    "loginSuccess": "Đăng nhập thành công",
+    "changePasswordSuccess": "Đổi mật khẩu thành công",
+    "deleteSuccess": "Xóa dữ liệu thành công",
+    "validate": {
+        "required": "* Trường bắt buộc nhập",
+        "beforeCurrentDate": "* Không được lớn hơn ngày hiện tại",
+        "afterCurrentDate": "* Không được nhỏ hơn ngày hiện tại",
+        "beforeCurrentMonth": "* Không được lớn hơn tháng/năm hiện tại",
+        "afterCurrentMonth": "* Không được nhỏ hơn tháng/năm hiện tại",
+        "dateNotAffter": "* Phải nhỏ hơn hoặc bằng ${dateNotAffter}.",
+        "dateNotBefore": "* Phải lớn hơn hoặc bằng giá trị ${dateNotBefore}.",
+        "isRangeOf6Month": "* Cách không quá 6 tháng so với ${dateNotAffter}.",
+        "duplicateArray": "* ${duplicateArray} không được phép trùng",
+        "email": "* Không đúng định dạng email",
+        "integer": "* Không phải số nguyên",
+        "invalidEmail": "* Định dạng Email không đúng",
+        "isEmail": "* Định dạng Email không đúng",
+        "invalidPassword": "* Định dạng Password không đúng (Ít nhất 6 ký tự, bao gồm cả chữ và số)",
+        "isIp": "* IP không đúng (127.0.0.1)",
+        "isUrl": "* URL không đúng (http://..,www..)",
+        "isValidInput": "* Các kí tự đặc biệt !#$^*[]\\\\'{}\"? bị giới hạn trong hệ thống",
+        "max": "* Giá trị lớn nhất là ${max}",
+        "maxlength": "* Dài nhất ${maxlength} ký tự",
+        "min": "* Giá trị nhỏ nhất là ${min}",
+        "minlength": "* Ngắn nhất ${minlength} ký tự",
+        "mobileNumber": "* Nhập đúng định dạng: (097) 456 78992 (097).456.7899 097 456 7899 +84974567899",
+        "number": "* Không phải số thực",
+        "onlyLetterNumber": "* Bạn chỉ được nhập số và chữ không dấu",
+        "personalIdNumber": "* Số CMND phải từ 8 đến 15 ký tự chữ và số",
+        "phone": "* Số điện thoại không hợp lệ",
+        "positiveInteger": "* Không phải số nguyên dương",
+        "positiveNumber": "* Không phải số thực dương",
+        "lenght9or12": "* Chỉ được nhập 9 hoặc 12 ký tự ",
+        "pid.lenght9or12": "Số CMTND/ CCCD chỉ được nhập 9 hoặc 12 ký tự ",
+        "requiredIfHaveOne": "* Trường bắt buộc",
+        "invalidFile": "* File không hợp lệ",
+        "ifHaveOneIsRequired": "* Trường bắt buộc",
+        "requiredControlInGroup": "* Trường bắt buộc",
+        "justRequiredOneField": "* Trường bắt buộc",
+        "dbTableColumnName": "* Bạn chỉ được nhập số, chữ không dấu hoặc kí tự (_)",
+        "err.endDateLessThanStart": "Ngày hết hiệu lực không được nhỏ hơn ngày hiệu lực",
+        "err.startDateNull": "Nhập ngày hiệu lực",
+        "cannotContainSpace": "* Không được có khoảng cách.",
+        "numberNotGreater": "* Phải nhỏ hơn hoặc bằng ${numberNotGreater}.",
+        "roomNotAvailable": "Phòng đã hết chỗ",
+        "waterElectricDuplicate": "Dữ liệu đã được nhập"
+    },
+    "setting": {
+        "categoryType": {
+            "title": "Loại danh mục",
+            "searchTitle": "Mã hoặc tên loại danh mục",
+            "codeShort": "Mã",
+            "nameShort": "Tên",
+            "code": "Mã loại danh mục",
+            "name": "Tên loại danh mục",
+            "duplicateCode": "Mã loại cấu hình đã tồn tại"
+        },
+        "category": {
+            "title": "Danh mục",
+            "searchTitle": "Mã hoặc tên danh mục",
+            "codeShort": "Mã",
+            "nameShort": "Tên",
+            "code": "Mã danh mục",
+            "name": "Tên danh mục",
+            "description": "Mô tả"
+        }
+    },
+    "mngOrganization": {
+        "organization": {
+            "treeTitle": "Cây đơn vị",
+            "code": "Mã đơn vị",
+            "name": "Tên đơn vị",
+            "dataList": "Danh sách đơn vị",
+            "establishDate": "Ngày thành lập",
+            "expriedDate": "Hoạt động đến ngày",
+            "orgParent": "Đơn vị cha",
+            "isStudy": "Lớp đào tạo"
+        },
+        "employee": {
+            "code": "Số hiệu",
+            "name": "Họ và tên",
+            "organization": "Đơn vị",
+            "organizationInner": "Đơn vị",
+            "organizationOutside": "Đơn vị ngoài HV",
+            "gender": "Giới tính",
+            "dateOfBirth": "Ngày sinh",
+            "create": "Thêm mới hồ sơ cán bộ",
+            "dataList": "Danh sách Cán bộ",
+            "type": "Diện đối tượng",
+            "ethnic": "Dân tộc",
+            "rank": "Cấp bậc",
+            "address": "Quê quán",
+            "partyMember": "Đảng viên",
+            "partyDate": "Ngày vào Đảng",
+            "statusDefenceSecurity": "Trạng thái học PQAN",
+            "typeDefenceSecurity": "Đối tượng QPAN",
+            "phoneNumber": "Số điện thoại"
+        }
+    },
+    "defenseSecurity": {
+        "confirmRegister": "Bạn có chắc chắn muốn đăng ký học cho {{name}}?",
+        "registerDuplicate": "Cán bộ/Học viên đã được đăng ký học",
+        "course": {
+            "code": "Mã khóa học",
+            "name": "Tên khóa học",
+            "fromDate": "Từ ngày",
+            "toDate": "Đến ngày",
+            "objType": "Đối tượng"
+        },
+        "classroom": {
+            "code": "Mã lớp học",
+            "name": "Tên lớp học",
+            "course": "Khóa học",
+            "description": "Giới thiệu"
+        },
+        "classroonDivision": {
+            "course": "Khóa học",
+            "classroom": "Lớp học"
+        },
+        "warn": {
+            "dataEmpty": "Không tìm thấy dữ liệu phù hợp"
+        }
+    },
+    "permission": {
+        "duplicateRoleResource": "Đã thêm tài nguyên cho vai trò"
+    }
+}

@@ -1,0 +1,11 @@
+::ng-deep app-role-page {
+    .action {
+        color: #141ED2;
+        text-decoration: unset !important;
+    }
+    .action:hover {
+        cursor: pointer;
+        text-decoration: underline !important;
+        color: #00A3FF !important;
+    }
+}

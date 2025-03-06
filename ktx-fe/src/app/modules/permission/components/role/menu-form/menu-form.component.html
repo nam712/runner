@@ -1,0 +1,7 @@
+<div>
+    <p-tree [value]="menus" scrollHeight="350px" selectionMode="checkbox" class="w-full md:w-30rem" [(selection)]="selectedMenus"></p-tree>
+</div>
+<div class="flex justify-content-center app-dialog-footer mt-2">
+    <p-button icon="pi pi-times" [label]="'common.label.quit' | translateAsync" styleClass="p-button-outlined" (onClick)="onClose()"></p-button>
+    <p-button icon="pi pi-save" [label]="'common.label.save' | translateAsync" (onClick)="onSave()"></p-button>
+</div>

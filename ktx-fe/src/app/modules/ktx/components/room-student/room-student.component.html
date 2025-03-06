@@ -1,0 +1,37 @@
+<p-table [value]="studentList" styleClass="p-datatable-sm" scrollHeight="500px">
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width: 5%;">STT</th>
+            <th style="width: 20%">
+                Mã sinh viên
+            </th>
+            <th style="width: 25%">
+                Họ và tên
+            </th>
+            <th style="width: 15%">
+                Ngày sinh
+            </th>
+            <th style="width: 15%">
+                Giới tính
+            </th>
+            <th style="width: 25%">
+                Mã hợp đồng
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item let-index="rowIndex">
+        <tr>
+            <td><span class="p-column-title">STT</span>{{ index + 1 }}</td>
+            <td><span class="p-column-title">Mã sinh viên</span>{{ item.studentCode }}</td>
+            <td><span class="p-column-title">Họ và tên</span>{{ item.studentFullname }}</td>
+            <td><span class="p-column-title">Ngày sinh</span>{{ item.dateOfBirth | date:'dd/MM/yyyy' }}</td>
+            <td><span class="p-column-title">Giới tính</span>{{ item.gender == 1 ? 'Nam' : 'Nữ' }}</td>
+            <td><span class="p-column-title">Mã hợp đồng</span>{{ item.contractCode }}</td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="7">{{ 'common.table.dataNotFound' | translateAsync }}</td>
+        </tr>
+    </ng-template>
+</p-table>

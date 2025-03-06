@@ -1,0 +1,13 @@
+::ng-deep app-organization-tree {
+    .p-panel-header {
+        display: block;
+        padding: 5px !important;
+    }
+    .p-tree {
+        border: none;
+        padding: 0px;
+    }
+    .p-panel .p-panel-content {
+        padding: 0px;
+    }
+}

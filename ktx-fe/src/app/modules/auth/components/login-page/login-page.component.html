@@ -1,0 +1,47 @@
+<div id="wrap-content" class="d-flex justify-content-center align-items-center">
+    <div class="login-form">
+        <form [formGroup]="formSave">
+            <div class="text-center pb-3">
+                <img width="150px" src="../../../../../assets/images/logo.png">
+            </div>
+            <div class="text-center text-uppercase">
+                <h4>Đăng nhập</h4>
+            </div>
+            <div class="formgrid grid">
+                <div class="field">
+                    <label class="font-semibold" [ngClass]="{'required': true}">Tài khoản</label>
+                    <input type="text" autoFocus="autoFocus" [formControl]="f['username']" [autoFocus]="true"
+                        [placeholder]="'Tài khoản'"
+                        class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                    <app-control-messages [control]="f['username']"></app-control-messages>
+                </div>
+                <div class="field">
+                    <label class="font-semibold" [ngClass]="{'required': true}">Mật khẩu</label>
+                    <!-- <input type="password" [formControl]="f['password']" [placeholder]="'Mật khẩu'"
+                        class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"> -->
+                    <span class="p-input-icon-right w-100">
+                        <i [class]="showPassword ? 'pi pi-eye-slash' : 'pi pi-eye'" (click)="showPassword = !showPassword"></i>
+                        <input *ngIf="!showPassword" type="password" [formControl]="f['password']" [placeholder]="'Mật khẩu'"
+                            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" />
+                        <input *ngIf="showPassword" type="text" [formControl]="f['password']" [placeholder]="'Mật khẩu'"
+                            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" />
+                    </span>
+                    <app-control-messages [control]="f['username']"></app-control-messages>
+                </div>
+                <!-- <app-text-input [property]="f['username']" class="col-12 md:col-12"
+                    [labelValue]="'Tài khoản'"></app-text-input>
+                <app-text-input [property]="f['password']" class="col-12 md:col-12"
+                    [labelValue]="'Mật khẩu'"></app-text-input> -->
+            </div>
+            <div *ngIf="loginError">
+                <i [ngStyle]="{color: 'var(--red-500)'}">Tài khoản hoặc mật khẩu không chính xác!</i>
+            </div>
+            <div class="text-center">
+                <p-button type="submit" label="Đăng nhập" severity="success" (onClick)="onLogin()"></p-button>
+            </div>
+            <!-- <div class="text-center mt-3">
+                <span>QPAN - 2024</span>
+            </div> -->
+        </form>
+    </div>
+</div>

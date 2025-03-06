@@ -1,0 +1,25 @@
+::ng-deep app-home-page {
+    .statistic-item {
+        // border: 1px solid black;
+        border-radius: 8px;
+        background-color: #fff;
+        // height: 180px;
+        .left {
+            color: #fff;
+            width: 130px;
+            // height: 100%;
+            background-color: var(--bgColor, #039D6F);
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+    }
+    #course-report,
+    #classroom-progress {
+        // margin: 0.5rem;
+        padding: 0.5rem;
+        background-color: #fff;
+        border-radius: 8px;
+    }
+}

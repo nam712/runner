@@ -1,0 +1,17 @@
+<form [formGroup]="formSave">
+    <div class="formgrid grid">
+        <app-drop-down [property]="f['month']" [labelValue]="'Tháng'" [options]="monthList" optionLabel="label"
+            optionValue="value" class="col-12 md:col-6" [showClear]="true"></app-drop-down>
+        <app-drop-down [property]="f['year']" [labelValue]="'Năm'" [options]="yearList" optionLabel="label"
+            optionValue="value" class="col-12 md:col-6" [showClear]="true"></app-drop-down>
+        <app-multi-select [property]="f['roomCodeList']" [options]="roomList" optionLabel="name"
+            optionValue="code" class="col-12 md:col-12" [labelValue]="'Phòng'"></app-multi-select>
+        <app-text-input [property]="f['unitPriceElectric']" class="col-12 md:col-6" [labelValue]="'Đơn giá điện (VNĐ)'"></app-text-input>
+        <app-text-input [property]="f['unitPriceWater']" class="col-12 md:col-6" [labelValue]="'Đơn giá nước (VNĐ)'"></app-text-input>
+    </div>
+    <div class="flex justify-content-center app-dialog-footer">
+        <p-button icon="pi pi-times" [label]="'common.label.quit' | translateAsync" styleClass="p-button-outlined"
+            (onClick)="onClose()"></p-button>
+        <p-button icon="pi pi-save" [label]="'common.label.save' | translateAsync" (onClick)="onSave()"></p-button>
+    </div>
+</form>

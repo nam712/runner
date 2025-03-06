@@ -1,0 +1,100 @@
+<div *hasPermission="[this, 'action.view', 'resource.employee']">
+    <p-panel [toggleable]="true">
+        <ng-template pTemplate="header">
+            <div>
+                <i class="fa-solid fa-bars mr-2"></i>
+                <b>{{ 'common.label.searchInfo' | translateAsync }}</b>
+            </div>
+        </ng-template>
+        <form [formGroup]="formSearch">
+            <div class="formgrid grid">
+                <app-text-input [property]="f['username']" class="col-12 md:col-6"
+                    [labelValue]="'Tên đăng nhập'"></app-text-input>
+            </div>
+            <div class="flex justify-content-center app-dialog-footer">
+                <p-button type="submit" icon="pi pi-search" [label]="'common.label.search' | translateAsync"
+                    (onClick)="doSearch()"></p-button>
+            </div>
+        </form>
+    </p-panel>
+    <p-panel styleClass="pt-2">
+        <ng-template pTemplate="header" class="block">
+            <div class="flex-1 flex justify-content-between flex-wrap">
+                <span class="flex align-items-center">
+                    <i class="fa-solid fa-list mr-2"></i>
+                    <b>Danh sách người dùng</b>
+                </span>
+                <div class="d-flex">
+                    <p-button
+                        *hasPermission="[this, 'action.insert', 'resource.employee']"
+                        class="flex align-items-center" icon="pi pi-plus" [label]="'common.label.add' | translateAsync"
+                        (onClick)="prepareCreateOrUpdate()"></p-button>
+                </div>
+            </div>
+        </ng-template>
+        <p-table [value]="dataTable?.data" [paginator]="dataTable?.data && dataTable?.data?.length" [rows]="10"
+            styleClass="p-datatable-sm" [lazy]="true" [first]="dataTable?.first"
+            [totalRecords]="dataTable?.recordsTotal" (onLazyLoad)="doSearch($event)" [showCurrentPageReport]="true"
+            currentPageReportTemplate="Tìm thấy {totalRecords} kết quả, hiển thị từ {first} - {last}"
+            [scrollable]="true">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 5%" >STT</th>
+                    <th style="width: 20%">
+                        Tên đăng nhập
+                    </th>
+                    <th style="width: 20%">
+                        Họ và tên
+                    </th>
+                    <th style="width: 20%">
+                        Vai trò
+                    </th>
+                    <th style="width: 10%"></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item let-index="rowIndex">
+                <tr>
+                    <td><span class="p-column-title">STT</span>{{ index + 1 }}</td>
+                    <td><span class="p-column-title">Tên đăng nhập</span>{{ item.username }}</td>
+                    <td><span class="p-column-title">Họ và tên</span>{{ item.fullName }}</td>
+                    <td>
+                        <span class="p-column-title">Vai trò</span>
+                        <div *ngIf="!!item.roles">
+                            <span *ngFor="let role of item.roles" class="el-role">
+                                {{ role.name }}
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="p-column-title">Thao tác</span>
+                        <div class="flex justify-content-center">
+                            <p-button *hasPermission="[this, 'action.update', 'resource.employee']"
+                                icon="pi pi-pencil" [pTooltip]="'common.label.edit' | translateAsync"
+                                styleClass="p-button-rounded p-button-text" tooltipPosition="top" 
+                                (onClick)="prepareCreateOrUpdate(item.id)"></p-button>
+                            <p-button *hasPermission="[this, 'action.update', 'resource.employee']"
+                                icon="pi pi-refresh" [pTooltip]="'Đặt lại mật khẩu'"
+                                styleClass="p-button-rounded p-button-warning p-button-text" tooltipPosition="top" 
+                                (onClick)="resetPassword(item)"></p-button>
+                            <p-button *hasPermission="[this, 'action.delete', 'resource.employee']"
+                                icon="pi pi-trash" [pTooltip]="'common.label.delete' | translateAsync"
+                                tooltipPosition="top" 
+                                styleClass="p-button-rounded p-button-danger p-button-text"
+                                (onClick)="onDelete(item.id)"></p-button>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="6">{{ 'common.table.dataNotFound' | translateAsync }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </p-panel>
+</div>
+<div *hasNotPermission="[this, 'action.view', 'resource.employee']" class="no-permission">
+    <i>
+        {{ 'common.error.haveNoPermission' | translateAsync }}
+    </i>
+</div>

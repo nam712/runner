@@ -1,0 +1,46 @@
+# GLOBAL CONFIGURATION
+spring:
+  application.name: base-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/db_ktx
+    username: root
+    password: 123456
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: none
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    #      ddl-auto: update
+    properties.hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 200MB
+      max-request-size: 215MB
+server:
+  servlet.context-path: /
+  port: 8888
+  max-http-header-size: 10000000
+  tomcat:
+    basedir: C:\Users\ADMIN\OneDrive\Máy tính\quan-ly-ktx\quan-ly-ktx\ktx-be\Tmp
+report:
+  exportFolder: C:\Users\ADMIN\OneDrive\Máy tính\quan-ly-ktx\quan-ly-ktx\ktx-be\exportFolder\
+common:
+  upload:
+    max-file-size: 15
+  app:
+    default-password: 123456
+    folder-upload-files: C:\Users\ADMIN\OneDrive\Máy tính\quan-ly-ktx\quan-ly-ktx\ktx-be\upload
+
+security:
+  jwt:
+    secret-key: 3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b
+  # 1h in millisecond
+    expiration-time: 3600000
+
+# Cau hinh tien trinh
+cron:
+  classroomStatusScheduled: 0 0/15 * * * *
+  endCourseScheduled: 0 0 23 * * *

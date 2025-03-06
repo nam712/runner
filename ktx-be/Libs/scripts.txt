@@ -1,0 +1,2 @@
+mvn install:install-file "-Dfile=jxcell.jar" "-DgroupId=score.jxcell" "-DartifactId=jxcell" "-Dversion=1.5" "-Dpackaging=jar"
+mvn install:install-file "-Dfile=score-lib.jar" "-DgroupId=sCore.core" "-DartifactId=sCore" "-Dversion=1.5" "-Dpackaging=jar"

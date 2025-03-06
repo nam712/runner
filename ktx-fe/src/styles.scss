@@ -1,0 +1,218 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~@fortawesome/fontawesome-free/css/all.css";
+@import "primeng/resources/primeng.css";
+@import "primeflex/primeflex.scss";
+@import "primeicons/primeicons.css";
+// @import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "./assets/theme.css";
+
+
+$primary:    #141ED2 !default;
+
+body {
+    margin: 0px;
+    font-family: Averta, Arial, Helvetica, sans-serif !important;
+    // font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    background-color: #E9EAFF;
+    overflow: hidden;
+}
+
+input {
+    border: 1px solid #dee2e6;
+}
+
+.app-dialog-footer {
+    button {
+        margin-right: 10px;
+    }
+}
+
+.p-dropdown.p-component {
+    width: 100%;
+    height: 40px;
+
+    .p-dropdown-label {
+        padding: 6px 10px;
+    }
+}
+
+.required::after {
+    content: "*";
+    color: #a94442;
+    padding-left: 3px;
+}
+
+.p-button {
+    padding: 7px 5px !important;
+}
+
+.p-panelmenu-header-action chevronrighticon, chevrondownicon {
+    order: 1 !important; // to be the first item on right side.
+}
+// .p-panelmenu-icon {
+//     order: 1 !important; // to be the first item on right side.
+// }
+
+.p-menuitem-text {
+    flex-grow: 1 !important; // to fill the whole space and push the icon to the end
+}
+
+.p-button {
+    background: $primary;
+    border-color: $primary;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+}
+// Table style start
+.p-datatable .p-datatable-thead > tr > th {
+    background: #E8EAF6;
+}
+.p-datatable-wrapper {
+    border-radius: 8px;
+    .p-button {
+        padding: 0px !important;
+        height: unset !important;
+        width: 26px;
+    }
+    .pi {
+        font-size: 14px !important;
+    }
+}
+.p-paginator {
+    .p-paginator-pages {
+        .p-paginator-page {
+            border: #D4D7E7 1px solid;
+            border-radius: 8px;
+            height: 32px;
+            width: 32px;
+            min-width: unset;
+        }
+        .p-paginator-page.p-highlight {
+            border: #141ED2 1px solid;
+            color: #141ED2;
+            background-color: #FFFFFF;
+        }
+    }
+    .p-paginator-prev,
+    .p-paginator-next {
+        border: #D4D7E7 1px solid;
+        border-radius: 8px;
+        height: 32px;
+        width: 32px;
+        min-width: unset;
+    }
+    .p-paginator-first,
+    .p-paginator-last {
+        display: none;
+        pointer-events: none;
+    }
+    .p-paginator-first {
+        display: block;
+        flex: 1;
+        opacity: 0;
+    }
+}
+// .p-datatable .p-datatable-thead > tr > th {
+//     text-align: center;
+// }
+// Table style end
+// .field {
+//     // margin-bottom: unset;
+// }
+
+// Datepicker
+.p-calendar .p-datepicker {
+    min-width: unset !important;
+}
+.p-datepicker table td {
+    padding: unset !important;
+}
+.p-datepicker.p-component {
+    width: 300px !important;
+    min-width: unset !important;
+}
+
+.status-error,
+.status-sucess,
+.status-warn,
+.status-info {
+    border-radius: 8px;
+    padding: 5px;
+    color: #ffffff;
+    font-size: 12px;
+    opacity: 0.8;
+}
+.status-error {
+    background: #FA0B0B;
+}
+.status-sucess {
+    background: #06A561;
+}
+.status-warn {
+    background: #FFC122;
+}
+.status-info {
+    background: #66CAFF;
+}
+input:read-only {
+    background-color: #EBEDF3 !important;
+}
+
+// tabview
+.p-tabview-panels {
+    background: #E9EAFF !important;
+}
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+    background: #E9EAFF !important;
+}
+.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+    background: #f8f9fa !important;
+}
+.no-permission {
+    color: #FA0B0B;
+}
+// @media only screen and (min-width: 768px) {
+//     .p-datatable {
+//         max-width: calc( 100vw - 390px);
+//     }
+// }
+// .p-dialog-content {
+//     background-color: #E9EAFF !important;
+// }
+
+@media screen and (max-width: 960px) {
+    .p-datatable-thead > tr > th,
+    .p-datatable-tfoot > tr > td {
+        display: none !important;
+    }
+
+    .p-datatable-tbody > tr > td {
+        display: flex;
+        width: 100% !important;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .p-datatable-tbody > tr > td:not(:last-child) {
+        border: 0 none;
+    }
+
+    #pn_id_298.p-datatable-gridlines > .p-datatable-wrapper > .p-datatable-table > .p-datatable-tbody > tr > td:last-child {
+        border-top: 0;
+        border-right: 0;
+        border-left: 0;
+    }
+
+    .p-datatable-tbody > tr > td > .p-column-title {
+        display: block !important;
+        min-width: 100px;
+        font-weight: 600;
+        color: #343a40;
+    }
+    .row-expand {
+        > td {
+            display: block !important;
+        }
+    }
+}

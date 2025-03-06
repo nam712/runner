@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <tableName>employee</tableName>
+    <firstDataRow>5</firstDataRow>
+    <maxNumberOfRecord>10000</maxNumberOfRecord>
+    <col title="STT" type="long"  length="10" />
+	<col title="global.employeeCode" type="string"  length="20" nullable="false" duplicate="false"/>
+	<col title="global.fullname" type="string"  length="50" nullable="false"/>
+	<col title="global.dateOfBirth" type="date"  length="10" nullable="false"/>
+    <col title="global.gender" type="string"  length="3" nullable="false"/>	
+	<col title="global.address" type="string"  length="200" nullable="false"/>
+    <col title="global.objType" type="string"  length="200" nullable="true"/>
+	<col title="global.organization" type="string"  length="200" nullable="true"/>
+    <col title="global.organizationOutside" type="string"  length="200" nullable="true"/>
+    <col title="global.ethnic" type="string"  length="200" nullable="false"/>
+    <col title="global.rankLevel" type="string"  length="200" nullable="true"/>
+    <col title="global.partyDate" type="date"  length="10" nullable="true"/>
+    <col title="global.phoneNumber" type="string"  length="15" nullable="true"/>
+    <col title="global.typeDefenceSecurity" type="string"  length="25" nullable="false"/>
+    <col title="global.statusDefenceSecurity" type="string"  length="10" nullable="true"/>
+</root>

@@ -1,0 +1,105 @@
+<div *hasPermission="[this, 'action.view', 'resource.employee']">
+    <p-panel [toggleable]="true">
+        <ng-template pTemplate="header">
+            <div>
+                <i class="fa-solid fa-bars mr-2"></i>
+                <b>{{ 'common.label.searchInfo' | translateAsync }}</b>
+            </div>
+        </ng-template>
+        <form [formGroup]="formSearch">
+            <div class="formgrid grid">
+                <app-text-input [property]="f['code']" class="col-12 md:col-6"
+                    [labelValue]="'mngOrganization.employee.code' | translateAsync"></app-text-input>
+                <app-text-input [property]="f['fullname']" class="col-12 md:col-6"
+                    [labelValue]="'mngOrganization.employee.name' | translateAsync"></app-text-input>
+                <app-org-selector class="col-12 md:col-6"
+                    [labelValue]="'mngOrganization.employee.organization' | translateAsync"
+                    [property]="f['organizationWork']" [orgService]="orgService"></app-org-selector>
+            </div>
+            <div class="flex justify-content-center app-dialog-footer">
+                <p-button type="submit" icon="pi pi-search" [label]="'common.label.search' | translateAsync"
+                    (onClick)="doSearch()"></p-button>
+            </div>
+        </form>
+    </p-panel>
+    <p-panel styleClass="pt-2">
+        <ng-template pTemplate="header" class="block">
+            <div class="flex-1 flex justify-content-between flex-wrap">
+                <!-- <b class="flex align-items-center">{{ 'mngOrganization.organization.dataList' | translateAsync
+                    }}</b> -->
+                <span class="flex align-items-center">
+                    <i class="fa-solid fa-list mr-2"></i>
+                    <b>{{ 'mngOrganization.employee.dataList' | translateAsync }}</b>
+                </span>
+                <div class="d-flex">
+                    <p-button  *hasPermission="[this, 'action.insert', 'resource.employee']" class="flex align-items-center" icon="pi pi-plus" [label]="'common.label.add' | translateAsync"
+                        (onClick)="prepareCreateOrUpdate()"></p-button>
+                </div>
+            </div>
+        </ng-template>
+        <p-table [value]="dataTable?.data" [paginator]="dataTable?.data && dataTable?.data?.length" [rows]="10"
+            styleClass="p-datatable-sm" [lazy]="true" [first]="dataTable?.first"
+            [totalRecords]="dataTable?.recordsTotal" (onLazyLoad)="doSearch($event)" [showCurrentPageReport]="true"
+            currentPageReportTemplate="Tìm thấy {totalRecords} kết quả, hiển thị từ {first} - {last}">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 5%;">STT</th>
+                    <th style="width: 10%">
+                        {{ 'mngOrganization.employee.code' | translateAsync }}
+                    </th>
+                    <th style="width: 15%">
+                        {{ 'mngOrganization.employee.name' | translateAsync }}
+                    </th>
+                    <th style="width: 7%">
+                        {{ 'mngOrganization.employee.dateOfBirth' | translateAsync }}
+                    </th>
+                    <th style="width: 7%">
+                        {{ 'mngOrganization.employee.gender' | translateAsync }}
+                    </th>
+                    <th style="width: 10%">
+                        {{ 'mngOrganization.employee.address' | translateAsync }}
+                    </th>
+                    <th style="width: 10%">
+                        {{ 'mngOrganization.employee.organization' | translateAsync }}
+                    </th>
+                    <th style="width: 7%"></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item let-index="rowIndex">
+                <tr>
+                    <td><span class="p-column-title">STT</span>{{ index + 1 }}</td>
+                    <td><span class="p-column-title">{{ 'mngOrganization.employee.code' | translateAsync }}</span>{{ item.code }}</td>
+                    <td><span class="p-column-title">{{ 'mngOrganization.employee.name' | translateAsync }}</span>{{ item.fullname }}</td>
+                    <td><span class="p-column-title">{{ 'mngOrganization.employee.dateOfBirth' | translateAsync }}</span>{{ item.dateOfBirth | date:'dd/MM/yyyy' }}</td>
+                    <td><span class="p-column-title">{{ 'mngOrganization.employee.gender' | translateAsync }}</span>{{ item.gender == 1 ? 'Nam' : 'Nữ' }}</td>
+                    <td><span class="p-column-title">{{ 'mngOrganization.employee.address' | translateAsync }}</span>{{ item.address }}</td>
+                    <td><span class="p-column-title">{{ 'mngOrganization.employee.organization' | translateAsync }}</span>{{ item.organizationName }}</td>
+                    <td>
+                        <span class="p-column-title">Thao tác</span>
+                        <div class="flex justify-content-center">
+                            <p-button *hasPermission="[this, 'action.update', 'resource.employee']" icon="pi pi-pencil" [pTooltip]="'common.label.edit' | translateAsync"
+                                styleClass="p-button-rounded p-button-text"
+                                (onClick)="prepareCreateOrUpdate(item.id)"></p-button>
+                            <p-button *hasPermission="[this, 'action.delete', 'resource.employee']" icon="pi pi-trash" [pTooltip]="'common.label.delete' | translateAsync"
+                                styleClass="p-button-rounded p-button-danger p-button-text"
+                                (onClick)="onDeleteEmp(item.id)"></p-button>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="10">{{ 'common.table.dataNotFound' | translateAsync }}</td>
+                </tr>
+            </ng-template>
+            <!-- <ng-template pTemplate="paginatorleft">
+                <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+            </ng-template> -->
+        </p-table>
+    </p-panel>
+</div>
+<div *hasNotPermission="[this, 'action.view', 'resource.employee']" class="no-permission">
+    <i>
+        {{ 'common.error.haveNoPermission' | translateAsync }}
+    </i>
+</div>

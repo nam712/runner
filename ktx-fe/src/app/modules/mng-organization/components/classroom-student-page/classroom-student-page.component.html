@@ -1,0 +1,98 @@
+<p-panel [toggleable]="true">
+    <ng-template pTemplate="header">
+        <div>
+            <i class="fa-solid fa-bars mr-2"></i>
+            <b>Thông tin lớp học</b>
+        </div>
+    </ng-template>
+    <div class="formgrid grid">
+        <div class="col-12 md:col-6">
+            Mã lớp: {{ classInfo?.code }}
+        </div>
+        <div class="col-12 md:col-6">
+            Tên lớp: {{ classInfo?.name }}
+        </div>
+        <div class="col-12 md:col-6">
+            Khoa: {{ classInfo?.departmentCode }}
+        </div>
+    </div>
+</p-panel>
+<p-panel [toggleable]="true" styleClass="mt-2">
+    <ng-template pTemplate="header">
+        <div>
+            <i class="fa-solid fa-bars mr-2"></i>
+            <b>Danh sách sinh viên</b>
+        </div>
+    </ng-template>
+    <div>
+        <div class="pb-2">
+            <!-- *hasPermission="[this, 'action.insert', 'resource.student']" -->
+            <p-button  class="flex align-items-center" icon="pi pi-plus" [label]="'common.label.add' | translateAsync"
+                        (onClick)="prepareCreateOrUpdateStudent()"></p-button>
+        </div>
+        <div>
+            <p-table [value]="dataTable?.data" [paginator]="dataTable?.data && dataTable?.data?.length" [rows]="10"
+                styleClass="p-datatable-sm" [lazy]="true" [totalRecords]="dataTable?.recordsTotal"
+                (onLazyLoad)="doSearchStudent($event)" [showCurrentPageReport]="true" [first]="dataTable?.first"
+                currentPageReportTemplate="Tìm thấy {totalRecords} kết quả, hiển thị từ {first} - {last}"
+                [scrollable]="true">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 5%">STT</th>
+                        <th style="width: 20%">
+                            Mã sinh viên
+                        </th>
+                        <th style="width: 20%">
+                            Họ và tên
+                        </th>
+                        <th style="width: 20%">
+                            Ngày sinh
+                        </th>
+                        <th style="width: 20%">
+                            Giới tính
+                        </th>
+                        <th style="width: 20%">
+                            Quê quán
+                        </th>
+                        <th style="width: 20%">
+                            SĐT
+                        </th>
+                        <th style="width: 10%"></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-item let-index="rowIndex">
+                    <tr>
+                        <td><span class="p-column-title">STT</span>{{ index + 1 }}</td>
+                        <td><span class="p-column-title">Mã sinh viên</span>{{ item.code }}</td>
+                        <td><span class="p-column-title">Họ và tên</span>{{ item.fullname }}</td>
+                        <td><span class="p-column-title">Ngày sinh</span>{{ item.dateOfBirth | date:'dd/MM/yyyy'
+                            }}</td>
+                        <td><span class="p-column-title">Giới tính</span>{{ item.gender == 1 ? 'Nam' : 'Nữ' }}</td>
+                        <td><span class="p-column-title">Quê quán</span>{{ item.address }}</td>
+                        <td><span class="p-column-title">SĐT</span>{{ item.phoneNumber }}</td>
+                        <td><span class="p-column-title">Thao tác</span>
+                            <div class="flex justify-content-center">
+                                <p-button *hasPermission="[this, 'action.update', 'resource.student']"
+                                    icon="pi pi-pencil" [pTooltip]="'common.label.edit' | translateAsync"
+                                    styleClass="p-button-rounded p-button-text" tooltipPosition="top"
+                                    (onClick)="prepareCreateOrUpdateStudent(item.id)"></p-button>
+                                <p-button *hasPermission="[this, 'action.delete', 'resource.student']"
+                                    icon="pi pi-trash" [pTooltip]="'common.label.delete' | translateAsync"
+                                    tooltipPosition="top" styleClass="p-button-rounded p-button-danger p-button-text"
+                                    (onClick)="onDeleteStudent(item.id)"></p-button>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="8">{{ 'common.table.dataNotFound' | translateAsync }}</td>
+                    </tr>
+                </ng-template>
+                <!-- <ng-template pTemplate="paginatorleft">
+                <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+            </ng-template> -->
+            </p-table>
+        </div>
+    </div>
+</p-panel>
