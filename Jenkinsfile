@@ -11,7 +11,7 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/nam712/ktx-main.git'
             }
         }
-        stage('Build & Deploy') {
+        stage('Deploy') {
             steps {
                 script {
                     if (isUnix()) {
