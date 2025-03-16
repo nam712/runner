@@ -1,6 +1,5 @@
 services:
   db:
-    #image: mysql:latest
     #build:
      # context: ./db
      # dockerfile: Dockerfile
@@ -9,7 +8,6 @@ services:
       - "3306:3306"
     volumes:
       - sqlvolume:/var/lib/mysql
-      - ./db/db_ktx.sql:/docker-entrypoint-initdb.d/db_ktx.sql
     networks:
       - ktx-network
 
