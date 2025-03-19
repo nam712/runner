@@ -3,7 +3,6 @@ services:
     build:
       context: ./db
       dockerfile: Dockerfile
-    #image: ada26/ktx:db
     ports:
       - "3306:3306"
     volumes:
@@ -15,7 +14,6 @@ services:
     build:
       context: ./ktx-fe
       dockerfile: Dockerfile
-    #image: ada26/ktx:fe
     ports:
       - "4300:4300"
     depends_on:
@@ -27,7 +25,6 @@ services:
     build:
       context: ./ktx-be
       dockerfile: Dockerfile
-    #image: ada26/ktx:be
     ports:
       - "8888:8888"
     environment:
