@@ -27,7 +27,7 @@ pipeline {
             parallel {
                 stage('DB') {
                     steps {
-                        sh """
+                        bat """
                             docker build -t "${DB_IMAGE}" ./db
                             docker push "${DB_IMAGE}"
                         """
@@ -36,7 +36,7 @@ pipeline {
 
                 stage('BE') {
                     steps {
-                        sh """
+                        bat """
                             docker build -t "${BE_IMAGE}" ./ktx-be
                             docker push "${BE_IMAGE}"
                         """
@@ -45,7 +45,7 @@ pipeline {
 
                 stage('FE') {
                     steps {
-                        sh """
+                        bat """
                             docker build -t "${FE_IMAGE}" ./ktx-fe
                             docker push "${FE_IMAGE}"
                         """
@@ -58,7 +58,7 @@ pipeline {
             parallel {
                 stage('Deploy DB') {
                     steps {
-                        sh """
+                        bat """
                             mkdir -p ~/.ssh
                             echo "${SSH_KEY_DB}" > ~/.ssh/id_rsa
                             chmod 600 ~/.ssh/id_rsa
@@ -76,7 +76,7 @@ pipeline {
 
                 stage('Deploy BE') {
                     steps {
-                        sh """
+                        bat """
                             mkdir -p ~/.ssh
                             echo "${SSH_KEY_BE}" > ~/.ssh/id_rsa
                             chmod 600 ~/.ssh/id_rsa
@@ -94,7 +94,7 @@ pipeline {
 
                 stage('Deploy FE') {
                     steps {
-                        sh """
+                        bat """
                             mkdir -p ~/.ssh
                             echo "${SSH_KEY_FE}" > ~/.ssh/id_rsa
                             chmod 600 ~/.ssh/id_rsa
