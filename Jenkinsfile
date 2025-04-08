@@ -31,8 +31,8 @@ pipeline {
                     }
                     steps {
                         sh """
-                            docker build -t ${DB_IMAGE} ./db
-                            docker push ${DB_IMAGE}
+                            docker build -t "${DB_IMAGE}" ./db
+                            docker push "${DB_IMAGE}"
                         """
                     }
                 }
@@ -43,8 +43,8 @@ pipeline {
                     }
                     steps {
                         sh """
-                            docker build -t ${BE_IMAGE} ./ktx-be
-                            docker push ${BE_IMAGE}
+                            docker build -t "${BE_IMAGE}" ./ktx-be
+                            docker push "${BE_IMAGE}"
                         """
                     }
                 }
@@ -55,8 +55,8 @@ pipeline {
                     }
                     steps {
                         sh """
-                            docker build -t ${FE_IMAGE} ./ktx-fe
-                            docker push ${FE_IMAGE}
+                            docker build -t "${FE_IMAGE}" ./ktx-fe
+                            docker push "${FE_IMAGE}"
                         """
                     }
                 }
@@ -72,14 +72,14 @@ pipeline {
                     steps {
                         sh """
                             mkdir -p ~/.ssh
-                            echo "$SSH_KEY_DB" > ~/.ssh/id_rsa
+                            echo "${SSH_KEY_DB}" > ~/.ssh/id_rsa
                             chmod 600 ~/.ssh/id_rsa
                             ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ec2-user@${DB_EC2_IP} '
-                                docker pull ${DB_IMAGE}
+                                docker pull "${DB_IMAGE}"
                                 docker stop db-container || true
                                 docker rm db-container || true
-                                docker rmi $(docker images --filter=reference="ada26/ktx-db:*" -q | grep -v $(docker images -q ${DB_IMAGE})) || true
-                                docker run -d --name db-container -p 3306:3306 ${DB_IMAGE}
+                                docker rmi \$(docker images --filter=reference="ada26/ktx-db:*" -q | grep -v \$(docker images -q "${DB_IMAGE}")) || true
+                                docker run -d --name db-container -p 3306:3306 "${DB_IMAGE}"
                             '
                             rm -f ~/.ssh/id_rsa
                         """
@@ -93,14 +93,14 @@ pipeline {
                     steps {
                         sh """
                             mkdir -p ~/.ssh
-                            echo "$SSH_KEY_BE" > ~/.ssh/id_rsa
+                            echo "${SSH_KEY_BE}" > ~/.ssh/id_rsa
                             chmod 600 ~/.ssh/id_rsa
                             ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ec2-user@${BE_EC2_IP} '
-                                docker pull ${BE_IMAGE}
+                                docker pull "${BE_IMAGE}"
                                 docker stop be-container || true
                                 docker rm be-container || true
-                                docker rmi $(docker images --filter=reference="ada26/ktx-be:*" -q | grep -v $(docker images -q ${BE_IMAGE})) || true
-                                docker run -d --name be-container -p 8888:8888 ${BE_IMAGE}
+                                docker rmi \$(docker images --filter=reference="ada26/ktx-be:*" -q | grep -v \$(docker images -q "${BE_IMAGE}")) || true
+                                docker run -d --name be-container -p 8888:8888 "${BE_IMAGE}"
                             '
                             rm -f ~/.ssh/id_rsa
                         """
@@ -114,14 +114,14 @@ pipeline {
                     steps {
                         sh """
                             mkdir -p ~/.ssh
-                            echo "$SSH_KEY_FE" > ~/.ssh/id_rsa
+                            echo "${SSH_KEY_FE}" > ~/.ssh/id_rsa
                             chmod 600 ~/.ssh/id_rsa
                             ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ec2-user@${FE_EC2_IP} '
-                                docker pull ${FE_IMAGE}
+                                docker pull "${FE_IMAGE}"
                                 docker stop fe-container || true
                                 docker rm fe-container || true
-                                docker rmi $(docker images --filter=reference="ada26/ktx-fe:*" -q | grep -v $(docker images -q ${FE_IMAGE})) || true
-                                docker run -d --name fe-container -p 4300:4300 ${FE_IMAGE}
+                                docker rmi \$(docker images --filter=reference="ada26/ktx-fe:*" -q | grep -v \$(docker images -q "${FE_IMAGE}")) || true
+                                docker run -d --name fe-container -p 4300:4300 "${FE_IMAGE}"
                             '
                             rm -f ~/.ssh/id_rsa
                         """
