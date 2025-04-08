@@ -20,7 +20,7 @@ pipeline {
             parallel {
                 stage('Deploy DB') {
                     steps {
-                        bat """
+                        sh """
                             mkdir -p ~/.ssh
                             echo "${SSH_KEY_DB}" > ~/.ssh/id_rsa
                             chmod 600 ~/.ssh/id_rsa
@@ -38,7 +38,7 @@ pipeline {
 
                 stage('Deploy BE') {
                     steps {
-                        bat """
+                        sh """
                             mkdir -p ~/.ssh
                             echo "${SSH_KEY_BE}" > ~/.ssh/id_rsa
                             chmod 600 ~/.ssh/id_rsa
@@ -56,7 +56,7 @@ pipeline {
 
                 stage('Deploy FE') {
                     steps {
-                        bat """
+                        sh """
                             mkdir -p ~/.ssh
                             echo "${SSH_KEY_FE}" > ~/.ssh/id_rsa
                             chmod 600 ~/.ssh/id_rsa
