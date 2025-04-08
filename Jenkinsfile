@@ -26,9 +26,6 @@ pipeline {
         stage('Build & Push Images') {
             parallel {
                 stage('DB') {
-                    when {
-                        changeset "db/**"
-                    }
                     steps {
                         sh """
                             docker build -t "${DB_IMAGE}" ./db
@@ -38,9 +35,6 @@ pipeline {
                 }
 
                 stage('BE') {
-                    when {
-                        changeset "ktx-be/**"
-                    }
                     steps {
                         sh """
                             docker build -t "${BE_IMAGE}" ./ktx-be
@@ -50,9 +44,6 @@ pipeline {
                 }
 
                 stage('FE') {
-                    when {
-                        changeset "ktx-fe/**"
-                    }
                     steps {
                         sh """
                             docker build -t "${FE_IMAGE}" ./ktx-fe
@@ -66,9 +57,6 @@ pipeline {
         stage('Deploy to EC2') {
             parallel {
                 stage('Deploy DB') {
-                    when {
-                        changeset "db/**"
-                    }
                     steps {
                         sh """
                             mkdir -p ~/.ssh
@@ -87,9 +75,6 @@ pipeline {
                 }
 
                 stage('Deploy BE') {
-                    when {
-                        changeset "ktx-be/**"
-                    }
                     steps {
                         sh """
                             mkdir -p ~/.ssh
@@ -108,9 +93,6 @@ pipeline {
                 }
 
                 stage('Deploy FE') {
-                    when {
-                        changeset "ktx-fe/**"
-                    }
                     steps {
                         sh """
                             mkdir -p ~/.ssh
